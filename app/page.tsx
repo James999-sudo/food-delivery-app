@@ -5,45 +5,46 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, User, Truck, LayoutDashboard } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import CategoryFilters from "@/components/food/CategoryFilter";
 
-export default function Page() {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-4 bg-white shadow-md">
-        <h1 className="text-2xl font-bold">FoodExpress</h1>
-        <div className="space-x-4">
-          <Button variant="ghost">Login</Button>
-          <Button className="rounded-2xl">Sign Up</Button>
-        </div>
-      </nav>
+      <Navbar />
+      
 
       {/* Hero Section */}
-      <section className="grid md:grid-cols-2 gap-8 items-center px-8 py-16">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl font-extrabold mb-4">
-            Order Food Anytime, Anywhere
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            Fast delivery, fresh meals, and seamless ordering experience.
+      <section className="grid md:grid-cols-2 gap-10 items-center px-10 py-20">
+
+        <div>
+          <h1 className="text-5xl font-bold mb-6">
+            Delicious food delivered to your door
+          </h1>
+
+          <p className="text-gray-600 text-lg mb-6">
+            Order from the best restaurants near you anytime.
           </p>
+
           <div className="flex gap-4">
-            <Input placeholder="Enter your location..." className="rounded-2xl" />
-            <Button className="rounded-2xl">Find Food</Button>
+            <input
+              className="px-4 py-3 border rounded-xl w-full"
+              placeholder="Enter your delivery address"
+            />
+
+            <button className="bg-orange-500 text-white px-6 py-3 rounded-xl">
+              Find Food
+            </button>
           </div>
-        </motion.div>
-        <motion.img
-          src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
-          alt="Food"
+        </div>
+
+        <CategoryFilters />
+
+        <img
+          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
           className="rounded-2xl shadow-xl"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
         />
+
       </section>
 
       {/* Role Selection Section */}
@@ -117,6 +118,4 @@ export default function Page() {
       </footer>
     </div>
   );
- }
-
-
+}
