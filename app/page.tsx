@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, User, Truck, LayoutDashboard } from "lucide-react";
 
-export default function HomePage() {
+export default function Page() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Navbar */}
@@ -117,4 +117,6 @@ export default function HomePage() {
       </footer>
     </div>
   );
-}
+ }
+
+
