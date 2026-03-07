@@ -32,6 +32,13 @@ export default function Navbar() {
         >
           Cart
         </Button>
+        <Link href="/auth/login">
+          <Button variant="ghost">Login</Button>
+        </Link>
+
+        <Link href="/auth/register">
+          <Button className="rounded-2xl">Sign Up</Button>
+        </Link>
         <CartDrawer
           isOpen={cartOpen}
           onClose={() => setCartOpen(false)}
