@@ -3,8 +3,11 @@
 import { ShoppingCart, User } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import CartDrawer from "@/components/cart/CartDrawer"
 
 export default function Navbar() {
+  const [cartOpen, setCartOpen] = useState(false)
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-md sticky top-0 z-50">
 
@@ -23,10 +26,16 @@ export default function Navbar() {
           <User size={20} />
         </Button>
 
-        <Button className="flex items-center gap-2 rounded-full">
-          <ShoppingCart size={18} />
+        <Button
+          className="flex items-center gap-2 rounded-full"
+          onClick={() => setCartOpen(true)}
+        >
           Cart
         </Button>
+        <CartDrawer
+          isOpen={cartOpen}
+          onClose={() => setCartOpen(false)}
+        />
       </div>
 
     </nav>
