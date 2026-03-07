@@ -7,12 +7,41 @@ import { Input } from "@/components/ui/input";
 import { ShoppingCart, User, Truck, LayoutDashboard } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import CategoryFilters from "@/components/food/CategoryFilter";
+import { useCart } from "@/context/CartContext"
+import FoodCard from "@/components/food/FoodCard";
 
 export default function HomePage() {
+  const { cart } = useCart()
+
+  const total = cart.reduce(
+    (sum: number, item: any) => sum + item.price,
+    0
+  )
+
+  const foods = [
+    {
+      id: 1,
+      name: "Beef Burger",
+      price: 850,
+      image: "https://images.unsplash.com/photo-1550547660-d9450f859349"
+    },
+    {
+      id: 2,
+      name: "Chicken Wings",
+      price: 750,
+      image: "https://images.unsplash.com/photo-1562967914-608f82629710"
+    },
+    {
+      id: 3,
+      name: "Pepperoni Pizza",
+      price: 1200,
+      image: "https://images.unsplash.com/photo-1548365328-9f547fb0953c"
+    }
+  ]
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
       <Navbar />
-      
+
 
       {/* Hero Section */}
       <section className="grid md:grid-cols-2 gap-10 items-center px-10 py-20">
@@ -107,6 +136,42 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* MENU / ORDER SECTION */}
+
+      <section className="px-8 py-16 bg-gray-100">
+
+        <h3 className="text-3xl font-bold text-center mb-12">
+          Order Your Meal
+        </h3>
+
+        <div className="grid md:grid-cols-3 gap-8">
+
+          {cart.map((food: any) => (
+            <FoodCard key={food.id} food={food} />
+          ))}
+
+        </div>
+
+        {/* CART SUMMARY */}
+
+        <section className="px-8 py-12 bg-white">
+
+          <h3 className="text-2xl font-bold mb-4">
+            Cart Summary
+          </h3>
+
+          <p className="text-lg">
+            Items in Cart: {cart.length}
+          </p>
+
+          <p className="text-xl font-semibold mt-2">
+            Total: Ksh {total}
+          </p>
+
+        </section>
+
       </section>
 
       {/* Footer */}
