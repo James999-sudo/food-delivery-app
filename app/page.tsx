@@ -22,9 +22,6 @@ export default function HomePage() {
             Delicious food delivered to your door
           </h1>
 
-          <p className="text-gray-600 text-lg mb-6">
-            Order from the best restaurants near you anytime.
-          </p>
 
           <div className="flex gap-4">
             <input
