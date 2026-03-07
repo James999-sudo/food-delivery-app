@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useCart } from "@/context/CartContext"
 
@@ -6,48 +6,82 @@ export default function CartPage() {
 
   const { cart, removeFromCart } = useCart()
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0)
+  const total = cart.reduce(
+    (sum: number, item: any) => sum + item.price,
+    0
+  )
 
   return (
 
-    <div className="p-10">
+    <div className="p-10 max-w-4xl mx-auto">
 
-      <h1 className="text-3xl font-bold mb-6">
+      <h1 className="text-3xl font-bold mb-8">
         Your Cart
       </h1>
 
       {cart.length === 0 && (
-        <p>Your cart is empty</p>
+        <p className="text-gray-500">
+          Your cart is empty
+        </p>
       )}
 
-      {cart.map((item, index) => (
+      <div className="space-y-6">
 
-        <div
-          key={index}
-          className="flex justify-between items-center bg-white shadow p-4 mb-3 rounded-lg"
-        >
+        {cart.map((item: any, index: number) => (
 
-          <div>
-            <h3 className="font-bold">{item.name}</h3>
-            <p>Ksh {item.price}</p>
+          <div
+            key={index}
+            className="flex items-center justify-between bg-white shadow rounded-xl p-4"
+          >
+
+            <div className="flex items-center gap-4">
+
+              <img
+                src={item.image}
+                className="w-20 h-20 rounded-lg object-cover"
+              />
+
+              <div>
+
+                <h3 className="font-semibold text-lg">
+                  {item.name}
+                </h3>
+
+                <p className="text-gray-500">
+                  Ksh {item.price}
+                </p>
+
+              </div>
+
+            </div>
+
+            <button
+              onClick={() => removeFromCart(item.id)}
+              className="text-red-500"
+            >
+              Remove
+            </button>
+
           </div>
 
-          <button
-            onClick={() => removeFromCart(item.name)}
-            className="bg-red-500 text-white px-3 py-1 rounded"
-          >
-            Remove
-          </button>
+        ))}
 
-        </div>
+      </div>
 
-      ))}
+      {/* TOTAL PRICE */}
 
-      <h2 className="text-xl font-bold mt-6">
-        Total: Ksh {total}
-      </h2>
+      <div className="mt-10 border-t pt-6">
+
+        <h2 className="text-2xl font-bold">
+          Total: Ksh {total}
+        </h2>
+
+        <button className="mt-4 bg-green-600 text-white px-6 py-3 rounded-xl">
+          Proceed to Checkout
+        </button>
+
+      </div>
 
     </div>
-
   )
 }

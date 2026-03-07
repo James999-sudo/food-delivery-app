@@ -2,6 +2,27 @@
 
 import { useCart } from "@/context/CartContext"
 
+const foods = [
+  {
+    id: 1,
+    name: "Beef Burger",
+    price: 850,
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349"
+  },
+  {
+    id: 2,
+    name: "Chicken Wings",
+    price: 750,
+    image: "https://images.unsplash.com/photo-1562967914-608f82629710"
+  },
+  {
+    id: 3,
+    name: "Pepperoni Pizza",
+    price: 1200,
+    image: "https://images.unsplash.com/photo-1548365328-9f547fb0953c"
+  }
+]
+
 export default function FoodCard({ food }: any) {
   const { addToCart } = useCart()
 
