@@ -4,10 +4,10 @@ import { useCart } from "@/context/CartContext"
 
 export default function CartPage() {
 
-  const { cart, removeFromCart } = useCart()
+  const { cart, increaseQty, decreaseQty } = useCart()
 
   const total = cart.reduce(
-    (sum: number, item: any) => sum + item.price,
+    (sum: number, item: any) => sum + item.price * item.quantity,
     0
   )
 
@@ -27,40 +27,44 @@ export default function CartPage() {
 
       <div className="space-y-6">
 
-        {cart.map((item: any, index: number) => (
+        {cart.map((item: any) => (
 
           <div
-            key={index}
+            key={item.id}
             className="flex items-center justify-between bg-white shadow rounded-xl p-4"
           >
 
-            <div className="flex items-center gap-4">
+            <div>
 
-              <img
-                src={item.image}
-                className="w-20 h-20 rounded-lg object-cover"
-              />
+              <h3 className="font-semibold">
+                {item.name}
+              </h3>
 
-              <div>
-
-                <h3 className="font-semibold text-lg">
-                  {item.name}
-                </h3>
-
-                <p className="text-gray-500">
-                  Ksh {item.price}
-                </p>
-
-              </div>
+              <p className="text-gray-500">
+                Ksh {item.price}
+              </p>
 
             </div>
 
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className="text-red-500"
-            >
-              Remove
-            </button>
+            <div className="flex items-center gap-3">
+
+              <button
+                onClick={() => decreaseQty(item.id)}
+                className="bg-gray-200 px-3 py-1 rounded"
+              >
+                −
+              </button>
+
+              <span>{item.quantity}</span>
+
+              <button
+                onClick={() => increaseQty(item.id)}
+                className="bg-gray-200 px-3 py-1 rounded"
+              >
+                +
+              </button>
+
+            </div>
 
           </div>
 
@@ -68,17 +72,11 @@ export default function CartPage() {
 
       </div>
 
-      {/* TOTAL PRICE */}
-
       <div className="mt-10 border-t pt-6">
 
         <h2 className="text-2xl font-bold">
           Total: Ksh {total}
         </h2>
-
-        <button className="mt-4 bg-green-600 text-white px-6 py-3 rounded-xl">
-          Proceed to Checkout
-        </button>
 
       </div>
 

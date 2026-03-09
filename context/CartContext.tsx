@@ -1,45 +1,59 @@
-"use client"
+'use client'
 
 import { createContext, useContext, useState } from "react"
 
-type CartItem = {
-  name: string
-  price: number
-  image: string
-}
+const CartContext = createContext<any>(null)
 
-type CartContextType = {
-  cart: CartItem[]
-  addToCart: (item: CartItem) => void
-  removeFromCart: (name: string) => void
-}
+export function CartProvider({ children }: any) {
 
-const CartContext = createContext<CartContextType | null>(null)
+  const [cart, setCart] = useState<any[]>([])
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([])
+  function addToCart(food: any) {
 
-  function addToCart(item: CartItem) {
-    setCart([...cart, item])
+    const existing = cart.find(item => item.id === food.id)
+
+    if (existing) {
+      setCart(cart.map(item =>
+        item.id === food.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ))
+    } else {
+      setCart([...cart, { ...food, quantity: 1 }])
+    }
+
   }
 
-  function removeFromCart(name: string) {
-    setCart(cart.filter((item) => item.name !== name))
+  function increaseQty(id: number) {
+    setCart(cart.map(item =>
+      item.id === id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    ))
+  }
+
+  function decreaseQty(id: number) {
+
+    setCart(cart.map(item =>
+      item.id === id
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    ).filter(item => item.quantity > 0))
+
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{
+      cart,
+      addToCart,
+      increaseQty,
+      decreaseQty
+    }}>
       {children}
     </CartContext.Provider>
   )
 }
 
 export function useCart() {
-  const context = useContext(CartContext)
-
-  if (!context) {
-    throw new Error("useCart must be used inside CartProvider")
-  }
-
-  return context
+  return useContext(CartContext)
 }

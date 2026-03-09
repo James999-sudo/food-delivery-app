@@ -174,6 +174,18 @@ export default function HomePage() {
 
       </section>
 
+      {/* FLOATING CART BAR */}
+
+      <div className="fixed bottom-6 right-6 bg-orange-500 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-3">
+
+        <ShoppingCart size={20} />
+
+        <span>
+          {cart.length} items
+        </span>
+
+      </div>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white text-center py-6 mt-10">
         <p>© {new Date().getFullYear()} FoodExpress. All rights reserved.</p>
