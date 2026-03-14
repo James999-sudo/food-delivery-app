@@ -1,5 +1,9 @@
-import { fetchAPI } from "@/lib/api"
-
 export async function getMenu() {
-  return fetchAPI("/api/menu")
+  const res = await fetch("/api/menu")
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch menu")
+  }
+
+  return res.json()
 }
