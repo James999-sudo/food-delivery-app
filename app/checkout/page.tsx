@@ -6,7 +6,7 @@ export default function CheckoutPage() {
 
   const { cart } = useCart()
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0)
+  const total = cart.reduce((sum, ) => sum + item.price, 0)
 
   return (
 
