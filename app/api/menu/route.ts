@@ -4,8 +4,15 @@ export async function GET() {
       id: 1,
       name: "Beef Burger",
       price: 850,
-      image: "/burger.jpg",
-      category: "Burgers"
+      category: "Burgers",
+      image: "/burger.jpg"
+    },
+    {
+      id: 2,
+      name: "Chicken Pizza",
+      price: 1200,
+      category: "Pizza",
+      image: "/pizza.jpg"
     }
   ])
 }
