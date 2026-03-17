@@ -1,5 +1,4 @@
 'use client'
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,8 +8,18 @@ import Navbar from "@/components/layout/Navbar";
 import CategoryFilters from "@/components/food/CategoryFilter";
 import { useCart } from "@/context/CartContext"
 import FoodCard from "@/components/food/FoodCard";
+import { addToCartAPI } from "@/services/cartService";
 
 export default function HomePage() {
+  const handleAddToCart = async (food: any) => {
+    const token = localStorage.getItem("token")
+    const item = { id: food.id, name: food.name, price: food.price }
+    addToCart(item)
+    if (token) {
+      await addToCartAPI(item, token)
+    }
+  }
+
   const { cart } = useCart()
 
   const total = cart.reduce(
@@ -134,7 +143,7 @@ export default function HomePage() {
                 <Button className="rounded-2xl w-full flex items-center gap-2">
                   <ShoppingCart size={18} /> Add to Cart
                 </Button>
-                <button onClick={() => addToCart({ id: "pizza-1", name: "Margherita", price: 12.99 })}>
+                <button onClick={() => handleAddToCart({ id: "pizza-1", name: "Margherita", price: 12.99 })}>
                   Add Pizza
                 </button>
               </CardContent>
@@ -153,7 +162,7 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-3 gap-8">
 
-          {cart.map((food: any) => (
+          {foods.map((food) => (
             <FoodCard key={food.id} food={food} />
           ))}
 
@@ -197,4 +206,4 @@ export default function HomePage() {
       </footer>
     </div>
   );
-}
+}                                                                                                                                                                     where should I apply the code in step 6 ? 
