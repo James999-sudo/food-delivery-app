@@ -18,6 +18,8 @@ export default function HomePage() {
     0
   )
 
+  const { addToCart, increaseQty, decreaseQty } = useCart()
+
   const foods = [
     {
       id: 1,
@@ -132,6 +134,9 @@ export default function HomePage() {
                 <Button className="rounded-2xl w-full flex items-center gap-2">
                   <ShoppingCart size={18} /> Add to Cart
                 </Button>
+                <button onClick={() => addToCart({ id: "pizza-1", name: "Margherita", price: 12.99 })}>
+                  Add Pizza
+                </button>
               </CardContent>
             </Card>
           ))}
