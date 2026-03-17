@@ -5,22 +5,18 @@ import { createContext, useContext, ReactNode, useState } from 'react'
 export interface CartItem {
   id: string | number
   name: string
-  price: number          // important: number, not string!
-  quantity: number       // we'll always ensure it exists
-  // image?: string
-  // description?: string
-  // etc.
+  price: number
+  quantity: number
 }
 
-// Define the shape of the context value
 interface CartContextType {
   cart: CartItem[]
   addToCart: (item: Omit<CartItem, 'quantity'>) => void
   increaseQty: (id: string | number) => void
   decreaseQty: (id: string | number) => void
+  removeFromCart: (id: string | number) => void   // ← Added properly
 }
 
-// We provide a default value only for TypeScript — never use it at runtime
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -45,9 +41,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const increaseQty = (id: string | number) => {
     setCart((currentCart) =>
       currentCart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     )
   }
@@ -56,12 +50,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCart((currentCart) =>
       currentCart
         .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         )
         .filter((item) => item.quantity > 0)
     )
+  }
+
+  // ✅ Proper removeFromCart function
+  const removeFromCart = (id: string | number) => {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id))
   }
 
   const value: CartContextType = {
@@ -69,12 +66,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     addToCart,
     increaseQty,
     decreaseQty,
+    removeFromCart,        // ← Now correctly provided
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
-// Custom hook with safety check
 export function useCart(): CartContextType {
   const context = useContext(CartContext)
 
