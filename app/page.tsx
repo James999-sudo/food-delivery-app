@@ -152,8 +152,12 @@ export default function HomePage() {
                 <Button className="rounded-2xl w-full flex items-center gap-2">
                   <ShoppingCart size={18} /> Add to Cart
                 </Button>
-                <button onClick={() => handleAddToCart({ id: "pizza-1", name: "Margherita", price: 12.99 })}>
-                  Add Pizza
+                <button
+                  className="rounded-2xl w-full flex items-center justify-center gap-2"
+                  onClick={() => handleAddToCart(foods[0])}
+                >
+
+                  <ShoppingCart size={18} /> Add to Cart
                 </button>
               </CardContent>
             </Card>
