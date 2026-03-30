@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { User } from "../../../types/user"
 
-let users:any[] = []
+const users: User[] = []
 
 export async function POST(req: Request) {
 

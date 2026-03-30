@@ -1,13 +1,14 @@
 'use client'
 
 import { useCart } from "@/context/CartContext"
+import { CartItem } from "@/types/order"
 
 export default function CartPage() {
 
   const { cart, increaseQty, decreaseQty } = useCart()
 
   const total = cart.reduce(
-    (sum: number, item: any) => sum + item.price * item.quantity,
+    (sum: number, item: CartItem) => sum + item.price * item.quantity,
     0
   )
 
@@ -27,7 +28,7 @@ export default function CartPage() {
 
       <div className="space-y-6">
 
-        {cart.map((item: any) => (
+        {cart.map((item: CartItem) => (
 
           <div
             key={item.id}

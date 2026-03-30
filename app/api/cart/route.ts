@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
 import { verifyToken } from "@/lib/auth"
+import { CartItem } from "../../../types/order"
 
-let carts: any = {}
+const carts: Record<number, CartItem[]> = {}
 
 export async function GET(req: Request) {
   try {

@@ -1,13 +1,19 @@
 'use client'
 
 import { useCart } from "@/context/CartContext"
+import { CartItem } from "@/types/order"
 
-export default function CartDrawer({ isOpen, onClose }: any) {
+interface CartDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
     const { cart, removeFromCart } = useCart()
 
     const total = cart.reduce(
-        (sum: number, item: any) => sum + item.price,
+        (sum: number, item: CartItem) => sum + item.price,
         0
     )
 
@@ -29,7 +35,7 @@ export default function CartDrawer({ isOpen, onClose }: any) {
                     <p className="text-gray-500">Cart is empty</p>
                 )}
 
-                {cart.map((item: any, index: number) => (
+                {cart.map((item: CartItem, index: number) => (
 
                     <div
                         key={index}

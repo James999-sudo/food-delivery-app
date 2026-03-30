@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  function handleRegister(e: any) {
+  function handleRegister(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     alert("Account created successfully! (Prototype)")
   }

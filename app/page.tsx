@@ -1,17 +1,18 @@
 'use client'
-import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { ShoppingCart, User, Truck, LayoutDashboard } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import CategoryFilters from "@/components/food/CategoryFilter";
 import { useCart } from "@/context/CartContext"
 import FoodCard from "@/components/food/FoodCard";
+import { Food } from "@/types/food";
+import { CartItem } from "@/types/order";
 import { addToCartAPI } from "@/services/cartService";
+import Image from "next/image";
 
 export default function HomePage() {
-  const handleAddToCart = async (food: any) => {
+  const handleAddToCart = async (food: Food) => {
     const token = localStorage.getItem("token")
     const item = { id: food.id, name: food.name, price: food.price }
     addToCart(item)
@@ -23,11 +24,11 @@ export default function HomePage() {
   const { cart } = useCart()
 
   const total = cart.reduce(
-    (sum: number, item: any) => sum + item.price,
+    (sum: number, item: CartItem) => sum + item.price,
     0
   )
 
-  const { addToCart, increaseQty, decreaseQty } = useCart()
+  const { addToCart } = useCart()
 
   const foods = [
     {
@@ -77,8 +78,11 @@ export default function HomePage() {
 
         <CategoryFilters />
 
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+          alt="Food delivery"
+          width={800}
+          height={400}
           className="rounded-2xl shadow-xl"
         />
 
@@ -133,9 +137,11 @@ export default function HomePage() {
           {[1, 2, 3].map((item) => (
             <Card key={item} className="rounded-2xl shadow-lg hover:shadow-2xl transition">
               <CardContent className="p-4">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1550547660-d9450f859349"
                   alt="Meal"
+                  width={400}
+                  height={300}
                   className="rounded-2xl mb-4"
                 />
                 <h4 className="text-xl font-semibold mb-2">Delicious Burger</h4>
@@ -206,4 +212,4 @@ export default function HomePage() {
       </footer>
     </div>
   );
-}                                                                                                                                                                     where should I apply the code in step 6 ? 
+} 

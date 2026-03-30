@@ -6,15 +6,13 @@ import { Food } from "@/types/food"
 import { getMenu } from "@/services/menuService"
 
 export default function MenuPage() {
-    const [category, setCategory] = useState("All")
+    const [category] = useState("All")
     const [foods, setFoods] = useState<Food[]>([])
-    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchMenu = async () => {
             const menu = await getMenu()
             setFoods(menu)
-            setLoading(false)
         }
 
         fetchMenu()

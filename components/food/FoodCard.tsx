@@ -1,36 +1,20 @@
 "use client"
 
 import { useCart } from "@/context/CartContext"
+import { Food } from "@/types/food"
+import Image from "next/image"
 
-const foods = [
-  {
-    id: 1,
-    name: "Beef Burger",
-    price: 850,
-    image: "https://images.unsplash.com/photo-1550547660-d9450f859349"
-  },
-  {
-    id: 2,
-    name: "Chicken Wings",
-    price: 750,
-    image: "https://images.unsplash.com/photo-1562967914-608f82629710"
-  },
-  {
-    id: 3,
-    name: "Pepperoni Pizza",
-    price: 1200,
-    image: "https://images.unsplash.com/photo-1548365328-9f547fb0953c"
-  }
-]
-
-export default function FoodCard({ food }: any) {
+export default function FoodCard({ food }: { food: Food }) {
   const { addToCart } = useCart()
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-4">
       
-      <img
+      <Image
         src={food.image}
+        alt={food.name}
+        width={400}
+        height={160}
         className="w-full h-40 object-cover rounded-xl"
       />
 

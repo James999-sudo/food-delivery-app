@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 
-let users:any[] = [] // temporary storage
+interface User {
+  id: number
+  name: string
+  email: string
+  password: string
+}
+
+const users: User[] = [] // temporary storage
 
 export async function POST(req: Request) {
   try {
@@ -29,7 +36,7 @@ export async function POST(req: Request) {
       message: "User created successfully"
     })
 
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { message: "Signup failed" },
       { status: 500 }

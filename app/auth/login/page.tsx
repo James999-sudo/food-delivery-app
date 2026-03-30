@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  function handleLogin(e: any) {
+  function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     alert("Login successful (Prototype)")
   }
@@ -47,7 +47,7 @@ export default function LoginPage() {
         </form>
 
         <p className="text-sm text-center mt-4">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/auth/register"
             className="text-orange-500"

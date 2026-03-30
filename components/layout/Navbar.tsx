@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import CartDrawer from "@/components/cart/CartDrawer"
 import { useCart } from "@/context/CartContext"
+import { CartItem } from "@/types/order"
 
 export default function Navbar() {
   const { cart } = useCart()
 
   const cartCount = cart.reduce(
-    (sum: number, item: any) => sum + (item.quantity || 1),
+    (sum: number, item: CartItem) => sum + (item.quantity || 1),
     0
   )
 
