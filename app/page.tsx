@@ -35,19 +35,22 @@ export default function HomePage() {
       id: 1,
       name: "Beef Burger",
       price: 850,
-      image: "https://images.unsplash.com/photo-1550547660-d9450f859349"
+      image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+      category: "Main Course"
     },
     {
       id: 2,
       name: "Chicken Wings",
       price: 750,
-      image: "https://images.unsplash.com/photo-1562967914-608f82629710"
+      image: "https://images.unsplash.com/photo-1562967914-608f82629710",
+      category: "Appetizer"
     },
     {
       id: 3,
       name: "Pepperoni Pizza",
       price: 1200,
-      image: "https://images.unsplash.com/photo-1548365328-9f547fb0953c"
+      image: "https://images.unsplash.com/photo-1548365328-9f547fb0953c",
+      category: "Main Course"
     }
   ]
   return (
