@@ -4,4 +4,5 @@ export interface Food {
   price: number
   image: string
   category: string
+  rating: number
 }
